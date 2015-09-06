@@ -16,13 +16,26 @@ std::string MiniGPortugol::TextProcessor::nextToken() {
 			return "";
 	}
 
+	unsigned int start = 0;
+	unsigned int end = 0;
 	unsigned int i;
+	char last = -1;
 	for (i = 0; i < line.length(); i++) {
-		if ((isSpace(line[i]) || isSymbol(line[i])) && i != 0)
+		if (isSpace(line[i])) {
+			if (i == 0) {
+				last = ' ';
+				start++;
+				end++;
+			} else if (isSpace(last) && start <= end) {
+				if (start == end)
+					start++;
+				end++;
+			}
+		} else if (isSymbol(line[i]) && i != 0)
 			break;
 	}
 
-	std::string token = line.substr(0, i);
+	std::string token = line.substr(start, i);
 
 	line.erase(0, i);
 
