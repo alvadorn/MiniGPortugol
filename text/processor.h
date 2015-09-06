@@ -11,7 +11,8 @@ namespace MiniGPortugol {
 		std::string line;
 		std::ifstream file;
 		bool nextLine();
-		bool isSymbol(char c);
+		bool isSymbol(char);
+		bool isSpace(char);
 
 	public:
 		TextProcessor(char *filename);

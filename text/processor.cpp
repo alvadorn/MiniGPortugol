@@ -1,7 +1,9 @@
 #include "processor.h"
+#include <iostream>
 
 MiniGPortugol::TextProcessor::TextProcessor(char *filename) {
 	file.open(filename);
+	line = "";
 }
 
 MiniGPortugol::TextProcessor::~TextProcessor() {
@@ -9,13 +11,22 @@ MiniGPortugol::TextProcessor::~TextProcessor() {
 }
 
 std::string MiniGPortugol::TextProcessor::nextToken() {
-	if (line.length() > 0) {
+	if (line.length() == 0) {
 		if (!nextLine()) 
 			return "";
 	}
 
+	unsigned int i;
+	for (i = 0; i < line.length(); i++) {
+		if ((isSpace(line[i]) || isSymbol(line[i])) && i != 0)
+			break;
+	}
 
-	return "";
+	std::string token = line.substr(0, i);
+
+	line.erase(0, i);
+
+	return token;
 }
 
 bool MiniGPortugol::TextProcessor::isSymbol(char c) {
@@ -33,6 +44,12 @@ bool MiniGPortugol::TextProcessor::isSymbol(char c) {
 	}
 
 	return value; 
+}
+
+bool MiniGPortugol::TextProcessor::isSpace(char c) {
+	if (c == ' ')
+		return true;
+	return false;
 }
 
 // If is possible to get a new line then true.
