@@ -12,10 +12,10 @@ SRC=main.cpp $(SRCLEX) $(SRCTXT)
 all:
 	$(CC) $(SRC) $(LINK) $(APP)
 
-
-
 run:
 	./$(APP)
+
+rebuild: clean all
 
 clean:
 	rm -rf *.o $(APP)

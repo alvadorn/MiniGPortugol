@@ -8,11 +8,13 @@ namespace MiniGPortugol {
 	
 	class LexAnalyzer {
 	private:
+		TextProcessor *processor;
 		std::string token;
 
 	public:
+		void start();
 		std::string getToken();
-		LexAnalyzer();
+		LexAnalyzer(char []);
 		~LexAnalyzer();
 	};
 

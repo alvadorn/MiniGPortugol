@@ -2,7 +2,7 @@
 #define __T_PROCESSOR_H__
 
 #include <string>
-#include <sstream>
+#include <fstream>
 
 namespace MiniGPortugol {
 
