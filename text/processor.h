@@ -10,10 +10,14 @@ namespace MiniGPortugol {
 	private:
 		std::string line;
 		std::ifstream file;
+		bool nextLine();
+		bool isSymbol(char c);
 
 	public:
 		TextProcessor(char *filename);
 		~TextProcessor();
+
+		std::string nextToken();
 	};
 }
 
