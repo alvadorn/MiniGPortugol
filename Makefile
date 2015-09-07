@@ -6,7 +6,9 @@ APP=gportugol
 
 SRCLEX=lexanalyzer/lexanalyzer.cpp
 SRCTXT=text/processor.cpp
-SRC=main.cpp $(SRCLEX) $(SRCTXT)
+SRCTKN=token/token.cpp
+
+SRC=main.cpp $(SRCLEX) $(SRCTXT) $(SRCTKN)
 
 
 all:

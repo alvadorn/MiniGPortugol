@@ -1,2 +1,7 @@
-algoritmo                 teste          ;
-igor;
+algoritmo teste;
+variaveis
+	x: inteiro;
+fim-variaveis
+inicio
+	x := 2;
+fim

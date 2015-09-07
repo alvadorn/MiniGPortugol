@@ -18,6 +18,5 @@ std::string MiniGPortugol::LexAnalyzer::getToken() {
 void MiniGPortugol::LexAnalyzer::start() {
 	while ( (this->token = processor->nextToken()) != "") {
 		std::cout << token << std::endl;
-
 	}
 }
