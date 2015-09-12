@@ -4,7 +4,7 @@ COMPILE=$(OPT) -c
 LINK=$(OPT) -o
 APP=gportugol
 
-SRCLEX=lexanalyzer/lexanalyzer.cpp
+SRCLEX=lexanalyzer/lexanalyzer.cpp lexanalyzer/keywords.cpp
 SRCTXT=text/processor.cpp
 SRCTKN=token/token.cpp
 
@@ -21,4 +21,3 @@ rebuild: clean all
 
 clean:
 	rm -rf *.o $(APP)
-

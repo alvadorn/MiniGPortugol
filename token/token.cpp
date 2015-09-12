@@ -1,4 +1,5 @@
 #include "token.h"
+#include <iostream>
 
 
 MiniGPortugol::AbstractToken::AbstractToken() {
@@ -9,19 +10,32 @@ MiniGPortugol::AbstractToken::~AbstractToken() {
 
 }
 
-MiniGPortugol::UnmappedToken::UnmappedToken(std::string t_name) {
-	this->t_name = t_name;
+void MiniGPortugol::AbstractToken::print() {
+	std::cout << "nothing" << std::endl;
+}
+
+MiniGPortugol::UnmappedToken::UnmappedToken(std::string lexeme) {
+	this->lexeme = lexeme;
 }
 
 MiniGPortugol::UnmappedToken::~UnmappedToken() {
-	
 }
 
-MiniGPortugol::TypedToken::TypedToken(TokenType t_type, std::string t_name) {
+void MiniGPortugol::UnmappedToken::print() {
+	std::cout << lexeme << "\t\t\t" << "<" << lexeme << ">" << std::endl;
+}
+
+MiniGPortugol::TypedToken::TypedToken(std::string& lexeme, TokenType t_type,
+int position) {
 	this->t_type = t_type;
-	this->t_name = t_name;
+	this->lexeme = lexeme;
+	this->position = position;
 }
 
 MiniGPortugol::TypedToken::~TypedToken() {
 
+}
+
+void MiniGPortugol::TypedToken::print() {
+	std::cout << lexeme << "\t\t\t" << "<" << TokenTypeName[t_type] << "," << position << ">" << std::endl;
 }

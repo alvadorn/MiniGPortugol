@@ -9,23 +9,27 @@ namespace MiniGPortugol {
 	public:
 		AbstractToken();
 		virtual ~AbstractToken();
+		virtual void print();
+	protected:
+		std::string lexeme;
 	};
 
 	class UnmappedToken : public AbstractToken {
 	private:
-		std::string t_name;
 	public:
 		UnmappedToken(std::string);
 		~UnmappedToken();
+		void print();
 	};
 
 	class TypedToken : public AbstractToken {
 	private:
-		std::string t_name;
 		TokenType t_type;
+		int position;
 	public:
-		TypedToken(TokenType, std::string);
+		TypedToken(std::string&, TokenType, int);
 		~TypedToken();
+		void print();
 	};
 }
 

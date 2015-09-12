@@ -4,4 +4,10 @@
 #include <string>
 #include <cstdint>
 
+namespace MiniGPortugol {
+  class AbstractToken;
+  class TypedToken;
+  class UnmappedToken;
+};
+
 #endif // __GLOBALS_H__
