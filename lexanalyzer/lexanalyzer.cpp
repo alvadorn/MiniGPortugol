@@ -12,6 +12,8 @@ MiniGPortugol::LexAnalyzer::LexAnalyzer(char filename[]) {
 
 MiniGPortugol::LexAnalyzer::~LexAnalyzer() {
 	delete processor;
+	tokens.clear();
+	symbols.clear();
 }
 
 std::string MiniGPortugol::LexAnalyzer::getLexeme() {
@@ -27,6 +29,7 @@ void MiniGPortugol::LexAnalyzer::start() {
 		AbstractToken *object;
 		if ( Keywords::isReserved(lexeme) ) {
 			object = new TypedToken(lexeme, (TokenType) reserved, typed_counter++);
+			symbols.push_back((TypedToken *) object);
 		} else {
 			object = new UnmappedToken(lexeme);
 		}
@@ -36,6 +39,7 @@ void MiniGPortugol::LexAnalyzer::start() {
 	}
 	std::cout << tokens.size() << std::endl;
 	this->printRecognizeTable();
+	this->printSymbolsTable();
 }
 
 void MiniGPortugol::LexAnalyzer::printRecognizeTable() {
@@ -44,7 +48,19 @@ void MiniGPortugol::LexAnalyzer::printRecognizeTable() {
 	std::cout << "---------------------------" << std::endl;
 	std::cout << "Lexemas\t\t\tToken" << std::endl;
 
-	for (AbstractToken *t : tokens) {
+	for (auto *t : tokens) {
 		t->print();
+	}
+}
+
+void MiniGPortugol::LexAnalyzer::printSymbolsTable() {
+	std::cout << "---------------------" << std::endl;
+	std::cout << "Tabela de simbolos" << std::endl;
+	std::cout << "---------------------" << std::endl;
+	std::cout << "Pos\t\t\tSimbolo\t\t\tTipo" << std::endl;
+
+	for (auto *t : symbols) {
+		std::cout << t->getPosition() << "\t\t\t" << t->getLexeme() << "\t\t\t" <<
+			t->getTokenType() << std::endl;
 	}
 }

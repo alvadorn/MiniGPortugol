@@ -37,5 +37,18 @@ MiniGPortugol::TypedToken::~TypedToken() {
 }
 
 void MiniGPortugol::TypedToken::print() {
-	std::cout << lexeme << "\t\t\t" << "<" << TokenTypeName[t_type] << "," << position << ">" << std::endl;
+	std::cout << lexeme << "\t\t\t" << "<" << TokenTypeName[t_type] << "," <<
+		position << ">" << std::endl;
+}
+
+int MiniGPortugol::TypedToken::getPosition() {
+	return position;
+}
+
+int MiniGPortugol::TypedToken::getTokenType() {
+	return t_type;
+}
+
+std::string& MiniGPortugol::TypedToken::getLexeme() {
+	return lexeme;
 }

@@ -3,6 +3,7 @@
 
 #include <string>
 #include <vector>
+#include <list>
 #include "../token/token.h"
 #include "../text/processor.h"
 
@@ -13,7 +14,9 @@ namespace MiniGPortugol {
 		TextProcessor *processor;
 		std::string lexeme;
 		std::vector<AbstractToken *> tokens;
+		std::list<TypedToken *> symbols;
 		void printRecognizeTable();
+		void printSymbolsTable();
 
 	public:
 		void start();

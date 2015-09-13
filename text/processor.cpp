@@ -12,7 +12,7 @@ MiniGPortugol::TextProcessor::~TextProcessor() {
 
 std::string MiniGPortugol::TextProcessor::nextToken() {
 	if (line.length() == 0) {
-		if (!nextLine()) 
+		if (!nextLine())
 			return "";
 	}
 
@@ -45,7 +45,7 @@ std::string MiniGPortugol::TextProcessor::nextToken() {
 bool MiniGPortugol::TextProcessor::isSymbol(char c) {
 	bool value = false;
 	switch(c) {
-		case '=':
+		case ':':
 			value = true;
 			break;
 		case ';':
@@ -56,7 +56,7 @@ bool MiniGPortugol::TextProcessor::isSymbol(char c) {
 			break;
 	}
 
-	return value; 
+	return value;
 }
 
 bool MiniGPortugol::TextProcessor::isSpace(char c) {

@@ -30,6 +30,9 @@ namespace MiniGPortugol {
 		TypedToken(std::string&, TokenType, int);
 		~TypedToken();
 		void print();
+		int getPosition();
+		int getTokenType();
+		std::string& getLexeme();
 	};
 }
 

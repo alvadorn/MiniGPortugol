@@ -4,7 +4,7 @@
 #include <string>
 
 namespace MiniGPortugol {
-	enum TokenType { reserved = 0, identifier = 1, number = 2 };
+	enum TokenType { reserved = 0, identifier = 1, number = 2, unavailable = 3 };
 
 	const std::string TokenTypeName[] = { "reservado", "identificador", "numero" };
 }
