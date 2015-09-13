@@ -1,6 +1,6 @@
 algoritmo teste;
 variaveis
-	x: inteiro;
+	x, y: inteiro;
 fim-variaveis
 inicio
 	x := 2;

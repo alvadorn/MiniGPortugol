@@ -45,6 +45,9 @@ std::string MiniGPortugol::TextProcessor::nextToken() {
 bool MiniGPortugol::TextProcessor::isSymbol(char c) {
 	bool value = false;
 	switch(c) {
+		case ',':
+			value = true;
+			break;
 		case ':':
 			value = true;
 			break;

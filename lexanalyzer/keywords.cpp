@@ -10,7 +10,7 @@ bool MiniGPortugol::Keywords::isReserved(std::string stream) {
 }
 
 bool MiniGPortugol::Keywords::isSymbol(std::string stream) {
-	if (stream == ":=" || stream == ";" || stream == ":")
+	if (stream == ":=" || stream == ";" || stream == ":" || stream == ",")
 		return true;
 	return false;
 }
