@@ -17,6 +17,7 @@ namespace MiniGPortugol {
 		std::list<TypedToken *> symbols;
 		void printRecognizeTable();
 		void printSymbolsTable();
+		bool identifierExists(std::string&, int&);
 
 	public:
 		void start();

@@ -42,6 +42,10 @@ namespace MiniGPortugol {
         "real","se", "senao","variaveis", "verdadeiro" };
 
         bool isReserved(std::string stream);
+
+        bool isSymbol(std::string stream);
+
+        bool isNumber(std::string stream);
     }
 }
 

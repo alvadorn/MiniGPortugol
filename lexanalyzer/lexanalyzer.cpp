@@ -12,6 +12,8 @@ MiniGPortugol::LexAnalyzer::LexAnalyzer(char filename[]) {
 
 MiniGPortugol::LexAnalyzer::~LexAnalyzer() {
 	delete processor;
+	for (auto *t : tokens)
+		delete t;
 	tokens.clear();
 	symbols.clear();
 }
@@ -22,7 +24,7 @@ std::string MiniGPortugol::LexAnalyzer::getLexeme() {
 
 void MiniGPortugol::LexAnalyzer::start() {
 
-	int typed_counter = 0;
+	int typed_counter = 1;
 
 	while ( (this->lexeme = processor->nextToken()) != "") {
 		bool reserv = Keywords::isReserved(lexeme);
@@ -30,6 +32,19 @@ void MiniGPortugol::LexAnalyzer::start() {
 		if ( Keywords::isReserved(lexeme) ) {
 			object = new TypedToken(lexeme, (TokenType) reserved, typed_counter++);
 			symbols.push_back((TypedToken *) object);
+		} else if ( !Keywords::isSymbol(lexeme)) {
+			bool exist = false;
+			if ( Keywords::isNumber(lexeme))
+				object = new TypedToken(lexeme, (TokenType) number, typed_counter++);
+			else {
+				int position = -1;
+				if ( !(exist = this->identifierExists(lexeme, position)) ) {
+					position = typed_counter++;
+				} 
+				object = new TypedToken(lexeme, (TokenType) identifier, position);
+			}
+			if (!exist)
+				symbols.push_back((TypedToken *) object);
 		} else {
 			object = new UnmappedToken(lexeme);
 		}
@@ -63,4 +78,15 @@ void MiniGPortugol::LexAnalyzer::printSymbolsTable() {
 		std::cout << t->getPosition() << "\t\t\t" << t->getLexeme() << "\t\t\t" <<
 			t->getTokenType() << std::endl;
 	}
+}
+
+
+bool MiniGPortugol::LexAnalyzer::identifierExists(std::string& stream, int& position) {
+	for (auto *t : symbols) {
+		if (t->getLexeme() == stream) {
+			position = t->getPosition();
+			return true;
+		}
+	}
+	return false;
 }
