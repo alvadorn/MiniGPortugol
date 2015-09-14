@@ -11,5 +11,6 @@ int main(int argc, char *argv[]) {
 
 	MiniGPortugol::LexAnalyzer lexAnalyzer(argv[1]);
 	lexAnalyzer.start(); 
+	lexAnalyzer.printInformation();
 	return 0;
 }

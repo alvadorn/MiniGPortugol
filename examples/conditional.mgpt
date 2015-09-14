@@ -1,0 +1,13 @@
+algoritmo condition;
+variaveis
+	var1, var2 : inteiro;
+	char : caractere;
+fim-variaveis
+inicio
+	var1 := 2;
+	se var1 = 2 entao
+		char := v;
+	senao
+		var2 := 5;
+	fim-se
+fim

@@ -1,0 +1,9 @@
+algoritmo tryingsum;
+variaveis
+	x, y, z : inteiro;
+	w : real;
+fim-variaveis
+inicio
+	x := y + z;
+	w := x / 2.0;
+fim

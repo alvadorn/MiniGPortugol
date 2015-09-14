@@ -1,0 +1,15 @@
+algoritmo loop;
+variaveis
+	i : inteiro;
+	c : logico;
+fim-variaveis
+inicio
+	i := 0;
+	c := verdadeiro;
+	enquanto c faca
+		i := i + 2;
+		se i > 20 entao
+			c := falso;
+		fim-se
+	fim-enquanto
+fim

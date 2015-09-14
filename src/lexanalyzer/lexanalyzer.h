@@ -21,9 +21,11 @@ namespace MiniGPortugol {
 
 	public:
 		void start();
+		void printInformation();
 		std::string getLexeme();
 		LexAnalyzer(char []);
 		~LexAnalyzer();
+
 	};
 
 }

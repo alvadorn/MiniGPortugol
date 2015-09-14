@@ -22,12 +22,19 @@ std::string MiniGPortugol::LexAnalyzer::getLexeme() {
 	return this->lexeme;
 }
 
+
+void MiniGPortugol::LexAnalyzer::printInformation() {
+	this->printRecognizeTable();
+	this->printSymbolsTable();
+}
+
+// Inicia o analizador lexico
 void MiniGPortugol::LexAnalyzer::start() {
 
 	int typed_counter = 1;
 
 	while ( (this->lexeme = processor->nextToken()) != "") {
-		bool reserv = Keywords::isReserved(lexeme);
+
 		AbstractToken *object;
 		if ( Keywords::isReserved(lexeme) ) {
 			object = new TypedToken(lexeme, (TokenType) reserved, typed_counter++);
@@ -50,11 +57,8 @@ void MiniGPortugol::LexAnalyzer::start() {
 		}
 		tokens.push_back(object);
 
-		std::cout << lexeme << " >> " << reserv <<std::endl;
 	}
-	std::cout << tokens.size() << std::endl;
-	this->printRecognizeTable();
-	this->printSymbolsTable();
+
 }
 
 void MiniGPortugol::LexAnalyzer::printRecognizeTable() {
@@ -80,7 +84,7 @@ void MiniGPortugol::LexAnalyzer::printSymbolsTable() {
 	}
 }
 
-
+// Funcao verifica se o identificador ja foi utilizado caso ele seja uma variavel
 bool MiniGPortugol::LexAnalyzer::identifierExists(std::string& stream, int& position) {
 	for (auto *t : symbols) {
 		if (t->getLexeme() == stream) {

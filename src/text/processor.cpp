@@ -10,6 +10,7 @@ MiniGPortugol::TextProcessor::~TextProcessor() {
 	file.close();
 }
 
+// Captura a proxima stream no arquivo
 std::string MiniGPortugol::TextProcessor::nextToken() {
 	if (line.length() == 0) {
 		if (!nextLine())
@@ -42,6 +43,7 @@ std::string MiniGPortugol::TextProcessor::nextToken() {
 	return token;
 }
 
+// Verifica se o caracter lido e um simbolo delimitador
 bool MiniGPortugol::TextProcessor::isSymbol(char c) {
 	bool value = false;
 	switch(c) {
@@ -62,6 +64,7 @@ bool MiniGPortugol::TextProcessor::isSymbol(char c) {
 	return value;
 }
 
+// Verifica se o caractere e um espaco
 bool MiniGPortugol::TextProcessor::isSpace(char c) {
 	if (c == ' ')
 		return true;
