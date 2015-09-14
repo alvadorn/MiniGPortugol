@@ -3,6 +3,7 @@
 
 #include <string>
 #include <fstream>
+#include <list>
 
 namespace MiniGPortugol {
 
@@ -10,6 +11,7 @@ namespace MiniGPortugol {
 	private:
 		std::string line;
 		std::ifstream file;
+		std::list<std::string> tokens;
 		bool nextLine();
 		bool isSymbol(char);
 		bool isSpace(char);

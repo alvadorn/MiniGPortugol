@@ -1,5 +1,6 @@
 #include "processor.h"
 #include <iostream>
+#include <sstream>
 
 MiniGPortugol::TextProcessor::TextProcessor(char *filename) {
 	file.open(filename);
@@ -21,6 +22,7 @@ std::string MiniGPortugol::TextProcessor::nextToken() {
 	unsigned int end = 0;
 	unsigned int i;
 	char last = -1;
+	bool comment = false;
 	for (i = 0; i < line.length(); i++) {
 		if (isSpace(line[i])) {
 			if (i == 0) {
@@ -34,11 +36,21 @@ std::string MiniGPortugol::TextProcessor::nextToken() {
 			}
 		} else if (isSymbol(line[i]) && i != 0)
 			break;
+		else if (line[i] == '/' && line[i+1] == '/') {
+			comment = true;
+			break;
+		}
 	}
 
 	std::string token = line.substr(start, i);
 
-	line.erase(0, i);
+	if (comment) {
+		line.clear();
+		token = "//";
+	} else {
+
+		line.erase(0, i);
+	}
 
 	return token;
 }
@@ -73,9 +85,25 @@ bool MiniGPortugol::TextProcessor::isSpace(char c) {
 
 // If is possible to get a new line then true.
 bool MiniGPortugol::TextProcessor::nextLine() {
-	if (!file.eof()) {
-		file >> line;
-		return true;
-	}
-	return false;
+	
+
+
+	if (!file.eof() && tokens.size() == 0) {
+		char buffer[1001];
+		file.getline(buffer, 1000, '\n');
+		std::string to_string = buffer;
+		std::stringstream stream(to_string);
+		std::string buffer2;
+		while (stream >> buffer2)
+			tokens.push_back(buffer2);
+	} else if(file.eof())
+		return false;
+
+	line = tokens.front();
+	if (line == "//")
+		tokens.clear();
+	else
+		tokens.pop_front();
+
+	return true;
 }

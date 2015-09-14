@@ -35,6 +35,8 @@ void MiniGPortugol::LexAnalyzer::start() {
 
 	while ( (this->lexeme = processor->nextToken()) != "") {
 
+		if (lexeme == "//") continue;
+
 		AbstractToken *object;
 		if ( Keywords::isReserved(lexeme) ) {
 			object = new TypedToken(lexeme, (TokenType) reserved, typed_counter++);
