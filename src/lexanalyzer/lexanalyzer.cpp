@@ -4,16 +4,16 @@
 #include <iostream>
 
 MiniGPortugol::LexAnalyzer::LexAnalyzer(char filename[]) {
-	//processor = new TextProcessor(filename);
 	std::cout << "Loading keywords" << std::endl;
 	if (!loadKeywords()) {
 			exit(1);
 	}
 	std::cout << "Initializing LexAnalyzer" << std::endl;
+	processor = new TextProcessor(filename);
 }
 
 MiniGPortugol::LexAnalyzer::~LexAnalyzer() {
-	//delete processor;
+	delete processor;
 	keywords.clear();
 }
 

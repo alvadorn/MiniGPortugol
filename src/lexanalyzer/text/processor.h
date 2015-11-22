@@ -1,13 +1,26 @@
 #ifndef __T_PROCESSOR_H__
 #define __T_PROCESSOR_H__
 
-#include <string>
-#include <fstream>
-#include <list>
+#include <cstdint>
+#include <cstdio>
 
 namespace MiniGPortugol {
-
-	class TextProcessor {
+	namespace LexAnalyzer {
+		class TextProcessor {
+		private:
+			uint64_t line;
+			uint64_t column;
+			char buffer[2049];
+			void readline();
+			FILE *file;
+		public:
+			char nextChar();
+			void rollback();
+			uint64_t actualLineNumber();
+			uint64_t actualColumnNumber();
+		};
+	}
+	/*class TextProcessor {
 	private:
 		std::string line;
 		std::ifstream file;
@@ -21,7 +34,7 @@ namespace MiniGPortugol {
 		~TextProcessor();
 
 		std::string nextToken();
-	};
+	};*/
 }
 
 
