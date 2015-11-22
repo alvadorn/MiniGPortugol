@@ -1,23 +1,20 @@
 #ifndef __SYMBOLS_TABLE__
 #define __SYMBOLS_TABLE__
 
+#include <list>
 #include <string>
+#include "token.h"
+#include "tokentype.h"
 
-class SymbolRow {
-private:
-	std::string lexem;
-public:
-	SymbolRow(std::string);
-	~SymbolRow();
-};
-
-class SymbolsTable {
-private:
-	std::vector<SymbolRow> rows;
-public:
-	SymbolsTable();
-	~SymbolsTable();
-
-};
+namespace MiniGPortugol {
+	class SymbolsTable {
+	private:
+		std::list<Token> tokens;
+	public:
+		SymbolsTable();
+		~SymbolsTable();
+		void newToken(std::string&, TokenType);
+	};
+}
 
 #endif // __SYMBOLS_TABLE__

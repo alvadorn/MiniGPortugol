@@ -1,17 +1,14 @@
 #include "symbols_table.h"
 
-SymbolsTable::SymbolsTable() {
+MiniGPortugol::SymbolsTable::SymbolsTable() {
 
 }
 
-SymbolsTable::~SymbolsTable() {
+MiniGPortugol::SymbolsTable::~SymbolsTable() {
 
 }
 
-SymbolRow::SymbolRow(std::string lexeme) {
-	this->lexeme = lexeme;
-}
-
-SymbolRow::~SymbolRow() {
-
+void MiniGPortugol::SymbolsTable::newToken(std::string& lexeme, TokenType type) {
+	Token token(lexeme, type);
+	tokens.push_back(token);
 }

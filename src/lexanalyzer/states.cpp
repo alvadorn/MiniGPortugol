@@ -1,4 +1,5 @@
 #include "states.h"
+#include "../symbols/tokentype.h"
 #include <algorithm>
 
 /*std::map<uint8_t, std::map<Symbol, uint8_t> MiniGPortugol::States::states = {
@@ -53,10 +54,12 @@ void MiniGPortugol::States::createMap() {
                 { GREATER_THAN, 14           },
                 { MATH_OP, 16                },
                 { COLON, 17                  },
-                { CLOSE_PARENT, 19           } };
+                { CLOSE_PARENT, 19           },
+                { SEMICOLON, 10              }};
  states[1] = {  { NUMBER, 1                  },
                 { DOT, 2                     } };
- states[4] = {  { CHARACTER, 5               } };
+ states[4] = {  { LETTER, 5                  },
+                { NUMBER, 5                  }};
  states[7] = {  { ANYTHING_EXCPT_B_LINE, 7   },
                 { BREAK_LINE, 8              } };
  states[9] = {  { LETTER, 9                  },

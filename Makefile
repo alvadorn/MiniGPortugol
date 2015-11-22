@@ -6,7 +6,8 @@ APP=gportugol
 
 SRCLEX=src/lexanalyzer/lexanalyzer.cpp  src/lexanalyzer/states.cpp $(SRCTXT)
 SRCTXT=src/lexanalyzer/text/processor.cpp
-SRC=src/main.cpp $(SRCLEX)
+SRCSYM=src/symbols/symbols_table.cpp src/symbols/token.cpp
+SRC=src/main.cpp $(SRCLEX) $(SRCSYM)
 
 
 all:
