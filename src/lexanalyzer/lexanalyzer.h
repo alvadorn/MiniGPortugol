@@ -4,25 +4,15 @@
 #include <string>
 #include <vector>
 #include <list>
-#include "../token/token.h"
-#include "../text/processor.h"
 
 namespace MiniGPortugol {
 
 	class LexAnalyzer {
 	private:
-		TextProcessor *processor;
-		std::string lexeme;
-		std::vector<AbstractToken *> tokens;
-		std::list<TypedToken *> symbols;
-		void printRecognizeTable();
-		void printSymbolsTable();
-		bool identifierExists(std::string&, int&);
+		std::vector<std::string> keywords;
+		bool loadKeywords();
 
 	public:
-		void start();
-		void printInformation();
-		std::string getLexeme();
 		LexAnalyzer(char []);
 		~LexAnalyzer();
 
