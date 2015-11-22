@@ -4,7 +4,7 @@ COMPILE=$(OPT) -c
 LINK=$(OPT) -o
 APP=gportugol
 
-SRCLEX=src/lexanalyzer/lexanalyzer.cpp  src/lexanalyzer/states.cpp 
+SRCLEX=src/lexanalyzer/lexanalyzer.cpp  src/lexanalyzer/states.cpp $(SRCTXT)
 SRCTXT=src/lexanalyzer/text/processor.cpp
 SRC=src/main.cpp $(SRCLEX)
 

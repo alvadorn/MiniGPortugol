@@ -10,12 +10,12 @@ namespace MiniGPortugol {
 
 	class LexAnalyzer {
 	private:
-		TextProcessor processor;
+		TextProcessor *processor;
 		std::vector<std::string> keywords;
 		bool loadKeywords();
 
 	public:
-		LexAnalyzer(char []);
+		LexAnalyzer(char *);
 		~LexAnalyzer();
 
 	};

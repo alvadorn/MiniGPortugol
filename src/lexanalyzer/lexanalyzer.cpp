@@ -3,7 +3,7 @@
 #include <cstdio>
 #include <iostream>
 
-MiniGPortugol::LexAnalyzer::LexAnalyzer(char filename[]) {
+MiniGPortugol::LexAnalyzer::LexAnalyzer(char *filename) {
 	std::cout << "Loading keywords" << std::endl;
 	if (!loadKeywords()) {
 			exit(1);

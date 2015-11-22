@@ -5,21 +5,22 @@
 #include <cstdio>
 
 namespace MiniGPortugol {
-	namespace LexAnalyzer {
-		class TextProcessor {
-		private:
-			uint64_t line;
-			uint64_t column;
-			char buffer[2049];
-			void readline();
-			FILE *file;
-		public:
-			char nextChar();
-			void rollback();
-			uint64_t actualLineNumber();
-			uint64_t actualColumnNumber();
-		};
-	}
+	class TextProcessor {
+	private:
+		uint64_t line;
+		uint64_t column;
+		char buffer[2049];
+		char last;
+		void read2buffer();
+		FILE *file;
+	public:
+		TextProcessor(char *);
+		~TextProcessor();
+		char nextChar();
+		char rollback();
+		uint64_t getLine();
+		uint64_t getColumn();
+	};
 	/*class TextProcessor {
 	private:
 		std::string line;
