@@ -48,13 +48,14 @@ void MiniGPortugol::LexAnalyzer::analyze() {
 	uint8_t state = 0;
 	char c;
 	std::string buffer = "";
-	while ((c = processor->nextChar()) != EOF) {
-		std::cout << c << std::endl;
-		fgetc(stdin);
+	while ((c = processor->nextChar())) {
+		//std::cout << "Lido: " << c << std::endl;
+		//fgetc(stdin);
 		Symbol symbol = typeOfChar(c);
 		if (c == '/') {
 			if ((c = processor->nextChar()) == '/') skipComment();
-		} else if ((c == ' ' || c == '\t') && state == 0) {
+		} else if ((c == ' ' || c == '\t' || c == '\n') && state == 0) {
+			//std::cout << "Skip..." << std::endl;
 			continue;
 		} else {
 			//std::cout << "Before state: " << unsigned(state) << std::endl;
@@ -67,7 +68,7 @@ void MiniGPortugol::LexAnalyzer::analyze() {
 				buffer += c;
 				state = next_state;
 			}
-			std::cout << "Symbol: " << symbol << " State: " << unsigned(next_state) << " Buffer: " << buffer << std::endl;
+			//std::cout << "Symbol: " << symbol << " State: " << unsigned(next_state) << " Buffer: " << buffer << std::endl;
 
 			if (state_machine.isRecognizeState(state) && ender) {
 				MiniGPortugol::TokenType type = typeRecognized(state);
@@ -83,6 +84,7 @@ void MiniGPortugol::LexAnalyzer::analyze() {
 				state = 0;
 				buffer = "";
 			}
+			if (c == EOF) break;
 		}
 	}
 }
@@ -100,7 +102,7 @@ Symbol MiniGPortugol::LexAnalyzer::typeOfChar(char c) {
 	else if (c == '=') return EQUAL;
 	else if (c == '\'') return APOSTROPHE;
 	else if (c == '+') return MATH_OP;
-	else if (c == '-') return MATH_OP;
+	else if (c == '-') return MINUS;
 	else if (c == '/') return MATH_OP;
 	else if (c == '*') return MATH_OP;
 	else if (c == '%') return MATH_OP;

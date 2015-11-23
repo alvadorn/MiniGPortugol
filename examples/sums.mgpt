@@ -1,10 +1,10 @@
 // teste
 algoritmo tryingsum;
 variaveis
-	x, y, z : inteiro;
+	x,y,z:inteiro;
 	w : real;
 fim-variaveis
 inicio
-	x := y + z;
+	x := (y+z);
 	w := x / 2.0;
 fim

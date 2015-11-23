@@ -21,9 +21,12 @@ void MiniGPortugol::TextProcessor::read2buffer() {
 			buffer[i++] = c;
 			if (c == '\n') {
 				buffer[i++] = '\0';
+				//std::cout << "Printing buffer: " << buffer << std::endl;
 				break;
 			}
 		}
+		//fgets(buffer, 2048, file);
+		this->column = 0;
 	}
 }
 
@@ -36,22 +39,27 @@ uint64_t MiniGPortugol::TextProcessor::getColumn() {
 }
 
 char MiniGPortugol::TextProcessor::rollback() {
-	this->column--;
+	if (column > 0) {
+		this->column--;
+	}
 	return buffer[this->column];
 }
 
 char MiniGPortugol::TextProcessor::nextChar() {
 	if (column <= 2048) {
 		last = buffer[this->column++];
+		//std::cout << "Column is: " << column << std::endl;
 	} else {
+		//std::cout << "What the hell im doing, the column is: " << column << std::endl;
 		read2buffer();
 		column = 0;
 		last = nextChar();
 	}
 	if (last == '\n') {
+		//std::cout << "I need to read more" << std::endl;
 		line++;
 		read2buffer();
-		column = 0;
+		this->column = 0;
 	}
 	return last;
 }

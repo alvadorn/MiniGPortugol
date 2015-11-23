@@ -42,7 +42,7 @@ MiniGPortugol::States::~States() {
 }
 
 void MiniGPortugol::States::createMap() {
-  states[0] = { { OPEN_PARENT, 0             },
+  states[0] = { { OPEN_PARENT, 20            },
                 { NUMBER, 1                  },
                 { APOSTROPHE, 4              },
                 { D_SLASH, 7                 },
@@ -64,7 +64,8 @@ void MiniGPortugol::States::createMap() {
                 { BREAK_LINE, 8              } };
  states[9] = {  { LETTER, 9                  },
                 { NUMBER, 9                  },
-                { UNDERSCORE, 9              } };
+                { UNDERSCORE, 9              },
+                { MINUS, 9                   } };
  states[11] = { { GREATER_THAN, 12           },
                 { EQUAL, 13                  } };
  states[14] = { { EQUAL, 15                  } };
