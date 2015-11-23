@@ -1,9 +1,7 @@
-// ahuehauuhea
 algoritmo teste;
 variaveis
 	x, y: inteiro;
 fim-variaveis
 inicio
-// hue da baia
-	x := 2; // look me
+	x := 2;
 fim
