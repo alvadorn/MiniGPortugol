@@ -3,13 +3,19 @@
 #include <cstdint>
 #include <cstdio>
 #include <iostream>
+#include <algorithm>
 
 MiniGPortugol::LexAnalyzer::LexAnalyzer(char *filename) {
 	std::cout << "Loading keywords" << std::endl;
 	if (!loadKeywords()) {
 			exit(1);
 	}
+	std::sort(keywords.begin(), keywords.end(),
+	 [](std::string &a, std::string &b) -> bool { return a < b; });
 	std::cout << "Initializing LexAnalyzer" << std::endl;
+	std::cout << "------------------------" << std::endl;
+	std::cout << "    Token Recognize     " << std::endl;
+	std::cout << "------------------------" << std::endl;
 	processor = new TextProcessor(filename);
 }
 
@@ -46,12 +52,24 @@ void MiniGPortugol::LexAnalyzer::analyze() {
 		Symbol symbol = typeOfChar(c);
 		if (c == '/') {
 			if ((c = processor->nextChar()) == '/') skipComment();
+		} else if (c == ' ' || c == '\t') {
+			continue;
 		} else {
 			state = state_machine.nextState(state, symbol);
 			buffer += c;
-			if (state_machine.isRecognizeState(state)) {
 
+			if (state_machine.isRecognizeState(state)) {
+				MiniGPortugol::TokenType type = typeRecognized(state);
+				if (type == T_RES_OR_ID) {
+					if (std::binary_search(keywords.begin(), keywords.end(), buffer)) {
+						type = T_RESERVED;
+					} else {
+						type = T_IDENTIFIER;
+					}
+				}
+				symbols.newToken(buffer, type);
 			}
+
 		}
 	}
 }

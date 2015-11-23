@@ -2,6 +2,7 @@
 #define __TOKEN_H__
 
 #include <string>
+#include <cstdint>
 #include "tokentype.h"
 
 namespace MiniGPortugol {
@@ -9,10 +10,13 @@ namespace MiniGPortugol {
 	private:
 		std::string lexeme;
 		TokenType token_type;
+		uint64_t position;
 	public:
 		Token(std::string, TokenType);
 		~Token();
 		std::string getLexeme();
+		uint64_t getPosition();
+		void setPosition(uint64_t);
 	};
 }
 
