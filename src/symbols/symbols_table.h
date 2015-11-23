@@ -10,10 +10,12 @@ namespace MiniGPortugol {
 	class SymbolsTable {
 	private:
 		std::list<Token> tokens;
+		void printGeneralInfo(Token &);
+		uint64_t last_position;
 	public:
 		SymbolsTable();
 		~SymbolsTable();
-		void newToken(std::string&, TokenType);
+		void newToken(std::string&, TokenType, uint64_t, uint64_t);
 	};
 }
 

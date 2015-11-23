@@ -22,3 +22,7 @@ uint64_t MiniGPortugol::Token::getPosition() {
 void MiniGPortugol::Token::setPosition(uint64_t position) {
 	this->position = position;
 }
+
+MiniGPortugol::TokenType MiniGPortugol::Token::getType() {
+	return this->token_type;
+}

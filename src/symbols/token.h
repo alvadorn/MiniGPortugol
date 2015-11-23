@@ -17,6 +17,7 @@ namespace MiniGPortugol {
 		std::string getLexeme();
 		uint64_t getPosition();
 		void setPosition(uint64_t);
+		MiniGPortugol::TokenType getType();
 	};
 }
 

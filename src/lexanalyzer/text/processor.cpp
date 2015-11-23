@@ -15,7 +15,15 @@ MiniGPortugol::TextProcessor::~TextProcessor() {
 
 void MiniGPortugol::TextProcessor::read2buffer() {
 	if (!feof(file)) {
-		fgets(buffer, 2048, file);
+		int i = 0;
+		while(!feof(file)) {
+			char c = fgetc(file);
+			buffer[i++] = c;
+			if (c == '\n') {
+				buffer[i++] = '\0';
+				break;
+			}
+		}
 	}
 }
 
@@ -28,7 +36,8 @@ uint64_t MiniGPortugol::TextProcessor::getColumn() {
 }
 
 char MiniGPortugol::TextProcessor::rollback() {
-	return this->last;
+	this->column--;
+	return buffer[this->column];
 }
 
 char MiniGPortugol::TextProcessor::nextChar() {
@@ -39,7 +48,10 @@ char MiniGPortugol::TextProcessor::nextChar() {
 		column = 0;
 		last = nextChar();
 	}
-	if (last == '\n')
+	if (last == '\n') {
 		line++;
+		read2buffer();
+		column = 0;
+	}
 	return last;
 }

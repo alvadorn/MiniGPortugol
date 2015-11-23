@@ -49,16 +49,27 @@ void MiniGPortugol::LexAnalyzer::analyze() {
 	char c;
 	std::string buffer = "";
 	while ((c = processor->nextChar()) != EOF) {
+		std::cout << c << std::endl;
+		fgetc(stdin);
 		Symbol symbol = typeOfChar(c);
 		if (c == '/') {
 			if ((c = processor->nextChar()) == '/') skipComment();
-		} else if (c == ' ' || c == '\t') {
+		} else if ((c == ' ' || c == '\t') && state == 0) {
 			continue;
 		} else {
-			state = state_machine.nextState(state, symbol);
-			buffer += c;
+			//std::cout << "Before state: " << unsigned(state) << std::endl;
+			uint8_t next_state = state_machine.nextState(state, symbol);
+			bool ender = false;
+			if (next_state  ==  254 || next_state == 255) {
+				processor->rollback();
+				ender = true;
+			} else {
+				buffer += c;
+				state = next_state;
+			}
+			std::cout << "Symbol: " << symbol << " State: " << unsigned(next_state) << " Buffer: " << buffer << std::endl;
 
-			if (state_machine.isRecognizeState(state)) {
+			if (state_machine.isRecognizeState(state) && ender) {
 				MiniGPortugol::TokenType type = typeRecognized(state);
 				if (type == T_RES_OR_ID) {
 					if (std::binary_search(keywords.begin(), keywords.end(), buffer)) {
@@ -67,9 +78,11 @@ void MiniGPortugol::LexAnalyzer::analyze() {
 						type = T_IDENTIFIER;
 					}
 				}
-				symbols.newToken(buffer, type);
+				symbols.newToken(buffer, type, processor->getLine(),
+					processor->getColumn() - buffer.length());
+				state = 0;
+				buffer = "";
 			}
-
 		}
 	}
 }
