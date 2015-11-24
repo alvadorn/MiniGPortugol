@@ -6,7 +6,7 @@ fim-variaveis
 inicio
 	var1 := 2;
 	se var1 = 2 entao
-		char := v;
+		char := 'v';
 	senao
 		var2 := 5;
 	fim-se

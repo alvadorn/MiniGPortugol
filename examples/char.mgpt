@@ -1,0 +1,7 @@
+algoritmo carac;
+variaveis
+  abc : caractere;
+fim-variaveis
+inicio
+  abc := 'a';
+fim
