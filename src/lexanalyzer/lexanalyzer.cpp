@@ -4,6 +4,7 @@
 #include <cstdio>
 #include <iostream>
 #include <algorithm>
+#include <regex>
 
 MiniGPortugol::LexAnalyzer::LexAnalyzer(char *filename) {
 	std::cout << "Loading keywords" << std::endl;
@@ -52,18 +53,42 @@ void MiniGPortugol::LexAnalyzer::analyze() {
 		//std::cout << "Lido: " << c << std::endl;
 		//fgetc(stdin);
 		Symbol symbol = typeOfChar(c);
-		if (c == '/') {
-			if ((c = processor->nextChar()) == '/') skipComment();
-		} else if ((c == ' ' || c == '\t' || c == '\n') && state == 0) {
+
+		/*if (c == '/') {
+			if ((c = processor->nextChar()) == '/') {
+				skipComment();
+				continue;
+			} else {
+				c = processor->rollback();
+				std::cout << "Rolled" << c << std::endl;
+			}
+		}*/
+		if ((c == ' ' || c == '\t' || c == '\n') && state == 0) {
 			//std::cout << "Skip..." << std::endl;
 			continue;
 		} else {
-			//std::cout << "Before state: " << unsigned(state) << std::endl;
+
 			uint8_t next_state = state_machine.nextState(state, symbol);
 			bool ender = false;
+
+			if (state == 7) {
+				skipComment();
+				state = 0;
+				buffer = "";
+			}
+
+			//std::cout << "Before state: " << unsigned(state) << std::endl;
+
 			if (next_state  ==  254 || next_state == 255) {
 				processor->rollback();
 				ender = true;
+				if (state == 21) {
+					processor->rollback();
+					if (typeOfChar(buffer.back()) == MINUS) {
+						buffer.pop_back();
+					}
+					state = 9;
+				}
 			} else {
 				buffer += c;
 				state = next_state;
@@ -75,8 +100,10 @@ void MiniGPortugol::LexAnalyzer::analyze() {
 				if (type == T_RES_OR_ID) {
 					if (std::binary_search(keywords.begin(), keywords.end(), buffer)) {
 						type = T_RESERVED;
-					} else {
+					} else if (std::regex_match(buffer, std::regex("(\\w|_)(\\w|\\d|_)*"))){
 						type = T_IDENTIFIER;
+					} else {
+						type = T_ERROR;
 					}
 				}
 				symbols.newToken(buffer, type, processor->getLine(),
@@ -103,7 +130,7 @@ Symbol MiniGPortugol::LexAnalyzer::typeOfChar(char c) {
 	else if (c == '\'') return APOSTROPHE;
 	else if (c == '+') return MATH_OP;
 	else if (c == '-') return MINUS;
-	else if (c == '/') return MATH_OP;
+	else if (c == '/') return SLASH;
 	else if (c == '*') return MATH_OP;
 	else if (c == '%') return MATH_OP;
 	else if (c >= 'a' && c <= 'z') return LETTER;

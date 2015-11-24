@@ -7,4 +7,5 @@ fim-variaveis
 inicio
 	x := (y+z);
 	w := x / 2.0;
+	w := x-1.5432;
 fim

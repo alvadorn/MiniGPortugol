@@ -45,13 +45,14 @@ void MiniGPortugol::States::createMap() {
   states[0] = { { OPEN_PARENT, 20            },
                 { NUMBER, 1                  },
                 { APOSTROPHE, 4              },
-                { D_SLASH, 7                 },
+                { SLASH, 16                  },
                 { LETTER, 9                  },
                 { UNDERSCORE, 9              },
                 { EQUAL, 10                  },
                 { COMMA, 10                  },
                 { LESS_THAN, 11              },
                 { GREATER_THAN, 14           },
+                { MINUS, 16                  },
                 { MATH_OP, 16                },
                 { COLON, 17                  },
                 { CLOSE_PARENT, 19           },
@@ -65,14 +66,16 @@ void MiniGPortugol::States::createMap() {
  states[9] = {  { LETTER, 9                  },
                 { NUMBER, 9                  },
                 { UNDERSCORE, 9              },
-                { MINUS, 9                   } };
+                { MINUS, 21                  } };
  states[11] = { { GREATER_THAN, 12           },
                 { EQUAL, 13                  } };
  states[14] = { { EQUAL, 15                  } };
+ states[16] = { { SLASH, 7                   } };
  states[17] = { { EQUAL, 18                  } };
  states[2]  = { { NUMBER, 3                  } };
  states[5]  = { { APOSTROPHE, 6              } };
  states[3]  = { { NUMBER, 3                  } };
+ states[21] = { { LETTER, 21                 } };
 }
 
 /*

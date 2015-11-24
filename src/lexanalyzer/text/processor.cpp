@@ -4,6 +4,12 @@
 
 MiniGPortugol::TextProcessor::TextProcessor(char *filename) {
 	file = fopen(filename, "r");
+
+	if (file == NULL) {
+			std::cout << "Can\'t open source file!" << std::endl;
+			exit(1);
+	}
+
 	line = 1;
 	column = 0;
 	read2buffer();

@@ -5,9 +5,10 @@
 
 namespace MiniGPortugol {
 	typedef enum t_type { T_RESERVED = 0, T_IDENTIFIER, T_NUMBER, T_CHARACTER,
-		T_RES_OR_ID, T_SYMBOL } TokenType;
+		T_ERROR, T_RES_OR_ID, T_SYMBOL } TokenType;
 
-	const std::string TokenTypeName[] = { "reservado", "identificador", "numero" };
+	const std::string TokenTypeName[] = { "reservado", "identificador", "numero",
+ 		"caracter", "erro" };
 }
 
 #endif // __TOKEN_TYPE_H__
